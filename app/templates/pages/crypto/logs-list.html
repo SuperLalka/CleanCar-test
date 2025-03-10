@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="container my-5">
+		{% if is_paginated %}
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				{% if page_obj.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?crypto_slug={{ params.crypto_slug }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?crypto_slug={{ params.crypto_slug }}&page=1" aria-label="First">
+						<span aria-hidden="true">first</span>
+					</a>
+				</li>
+				{% endif %}
+				<li class="page-item">
+					<a class="page-link active">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+				</li>
+				{% if page_obj.has_next %}
+				<li class="page-item">
+					<a class="page-link" href="?crypto_slug={{ params.crypto_slug }}&page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+						<span aria-hidden="true">last</span>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?crypto_slug={{ params.crypto_slug }}&page={{ page_obj.next_page_number }}">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+		</nav>
+		{% endif %}
+	</div>
+	<div class="container">
+		<table class="table">
+			<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Значение</th>
+				<th scope="col">Время</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for object in object_list %}
+			<tr>
+				<td>{{ object.id }}</td>
+				<th>{{ object.value }}</th>
+				<td>{{ object.created_at }}</td>
+<!--				<td>{{ object.created_at|date:'Y-m-d H:i:s.u' }}</td>-->
+			</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    $("#crypto-search-form").on("submit", function (event) {
+        const roomName = $(this).find('input').val().toLowerCase();
+        window.location = 'http://' + window.location.host + '/crypto/' + roomName + '/';
+        event.preventDefault();
+    });
+</script>
+{% endblock javascript %}

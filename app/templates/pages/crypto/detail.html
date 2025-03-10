@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Комната: {{ object.slug }}{% endblock title %}
+
+{% block content %}
+<div class="container">
+	<div class="container my-5">
+		<h2>{{ object.key }}</h2>
+		<div id="chat-log"></div>
+		<ul class="list-group"></ul>
+	</div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    const roomName = "{{ object.slug }}";
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/'
+    );
+
+    chatSocket.onmessage = function (e) {
+        let message = e.data;
+				$("ul.list-group").append(`<li class='list-group-item text-center user-select-all'>${message}</li>`);
+
+		    let items = $("ul.list-group > li");
+        if (items.length > 8)
+            items[0].remove();
+    };
+
+    chatSocket.onclose = function (e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+</script>
+{% endblock javascript %}

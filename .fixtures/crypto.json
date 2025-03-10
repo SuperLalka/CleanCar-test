@@ -1,0 +1,62 @@
+[
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 1,
+    "fields": {
+      "key": "BTCUSDT",
+      "slug": "btcusdt",
+      "description": "",
+      "is_tracking": true
+    }
+  },
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 2,
+    "fields": {
+      "key": "ETHUSDT",
+      "slug": "ethusdt",
+      "description": "",
+      "is_tracking": true
+    }
+  },
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 3,
+    "fields": {
+      "key": "SOLUSDT",
+      "slug": "solusdt",
+      "description": "",
+      "is_tracking": true
+    }
+  },
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 4,
+    "fields": {
+      "key": "XRPUSDC",
+      "slug": "xrpusdc",
+      "description": "",
+      "is_tracking": true
+    }
+  },
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 5,
+    "fields": {
+      "key": "SUIUSDC",
+      "slug": "suiusdc",
+      "description": "",
+      "is_tracking": false
+    }
+  },
+  {
+    "model": "binance.cryptocurrencytradingpair",
+    "pk": 6,
+    "fields": {
+      "key": "DOGEUSDC",
+      "slug": "dogeusdc",
+      "description": "",
+      "is_tracking": false
+    }
+  }
+]

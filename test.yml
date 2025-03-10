@@ -1,0 +1,35 @@
+version: '3'
+
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    container_name: cc_test_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs_example/.django
+      - ./.envs_example/.postgres
+    command:
+      - /bin/sh
+      - -c
+      - |
+        python manage.py collectstatic
+        python manage.py test --noinput app.binance.tests.crypto.test_tasks.CryptocurrencyTradingPairTasksTestCase.test_process_stream_message_task
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile
+    container_name: cc_test_postgres
+    restart: always
+    env_file:
+      - ./.envs_example/.postgres
+
+  redis:
+    image: redis:6
+    container_name: cc_test_redis
+    restart: always
